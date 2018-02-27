@@ -12,8 +12,6 @@ var guessLeft = 9;
 
 var computerGuess = getNewComputerGuess();
 
-//how do I make the guess toLowerCase()
-
 document.onkeyup = function(event) {
 
     var guess = event.key;
@@ -47,22 +45,24 @@ console.log(event.keyCode);
 
     if(guessLeft === 0) {
         alert("You lost. Game is reset. Try again!!!");
-        guessLeft = 9;
-        guessesSoFar = [];
-        computerGuess = getNewComputerGuess();
-    } 
-    else if(guess === computerGuess){
-        guessLeft = 9;
-        guessesSoFar = [];
-        computerGuess = getNewComputerGuess();
-        document.getElementById("win-counter").innerHTML = ++wins;
-        document.getElementById("guess-counter").innerHTML = "";
-        document.getElementById("guess-left").innerHTML = guessLeft;
-    } else {
         losses++;
         document.getElementById("loss-counter").innerHTML = losses;
+        gameReset();
+
+    } 
+    else if(guess === computerGuess){
+        document.getElementById("win-counter").innerHTML = ++wins;
+        gameReset();
     }
 
+}
+
+function gameReset() {
+    guessLeft = 9;
+    guessesSoFar = [];
+    computerGuess = getNewComputerGuess();
+    document.getElementById("guess-counter").innerHTML = "";
+    document.getElementById("guess-left").innerHTML = guessLeft;
 }
 
 function getNewComputerGuess() {
